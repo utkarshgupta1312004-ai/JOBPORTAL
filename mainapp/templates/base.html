@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Resource — Online Job Portal</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Custom Black & White Editorial CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Header / Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-bw sticky-top" style="top:10px;">
+        <div class="container-xxl">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="{% url 'index' %}">
+            <image src="{% static 'img/Picture1.png' %}" alt="Galaxy Pvt. Ltd" height="50px"></image>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars fs-4 text-dark"></i>
+            </button>
+            <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}" href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'login' %}active{% endif %}" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}" href="{% url 'contact' %}">Contact Us</a>
+                    </li>
+                </ul>
+                <form class="d-flex align-items-center gap-2" role="search" action="{% url 'index' %}" method="get">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white border-end-0 border-dark"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input class="form-control form-control-bw border-start-0 ps-0" type="search" placeholder="Search jobs..." aria-label="Search">
+                    </div>
+                    <button class="btn btn-bw-dark" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Header / Navbar End -->
+
+    <!-- Main Content Container -->
+    <main class="flex-grow-1">
+        {% block main %}
+        <!-- Page specific block content -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer Start -->
+    <footer class="footer-bw mt-5 pt-5 pb-4">
+        <div class="container-xxl">
+            <!-- Social Media Top Section -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center pb-4 mb-4 border-bottom border-secondary">
+                <div class="mb-3 mb-md-0">
+                    <span class="text-light fw-medium fs-6"><i class="fa-solid fa-globe me-2"></i>Connect with Galaxy Resource across official networks:</span>
+                </div>
+                <div class="d-flex gap-3 fs-5">
+                    <a href="#" class="text-secondary hover-light" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-secondary hover-light" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-secondary hover-light" aria-label="Google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="text-secondary hover-light" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-secondary hover-light" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-secondary hover-light" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <!-- Main Links Section -->
+            <div class="row g-4 mb-4">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold mb-3 text-white">Galaxy Resource Pvt. Ltd.</h5>
+                    <p class="small text-secondary leading-relaxed">
+                        Galaxy Resource Pvt. Ltd. is a premier career bridge headquartered in Lucknow, Uttar Pradesh. Dedicated to connecting job seekers with verified top employers nationwide with transparency, speed, and modern intelligence.
+                    </p>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-white small tracking-wider">Navigation</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="{% url 'index' %}" class="text-decoration-none">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-decoration-none">About Us</a></li>
+                        <li><a href="{% url 'register' %}" class="text-decoration-none">Register Candidate</a></li>
+                        <li><a href="{% url 'login' %}" class="text-decoration-none">Account Login</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-decoration-none">Contact Team</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal Links -->
+                <div class="col-lg-2 col-md-6 col-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-white small tracking-wider">Resources</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="#" class="text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-decoration-none">Employer Verification</a></li>
+                        <li><a href="#" class="text-decoration-none">Help & Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="text-uppercase fw-bold mb-3 text-white small tracking-wider">Headquarters</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0 text-secondary">
+                        <li class="d-flex align-items-center gap-2"><i class="fas fa-location-dot text-light"></i> Lucknow, Uttar Pradesh, India</li>
+                        <li class="d-flex align-items-center gap-2"><i class="fas fa-envelope text-light"></i> utkarshgupta1312005@gmail.com</li>
+                        <li class="d-flex align-items-center gap-2"><i class="fas fa-phone text-light"></i> +91 9621424343</li>
+                        <li class="d-flex align-items-center gap-2"><i class="fas fa-headset text-light"></i> +91 6392401418</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Copyright -->
+            <div class="pt-4 border-top border-secondary text-center small text-secondary">
+                <p class="mb-0">© 2026 <strong>Galaxy Resource Pvt. Ltd.</strong> All Rights Reserved. Crafted by Utkarsh Gupta under guidance of Asif Ansari.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+
+</html>

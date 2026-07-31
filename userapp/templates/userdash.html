@@ -1,0 +1,288 @@
+{% extends 'userbase.html'%}
+{% load static %}
+
+{% block static %}
+<style>
+  .user-welcome-card {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eef2f6;
+    transition: all 0.25s ease-in-out;
+    height: 100%;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+  }
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .icon-blue { background: #eff6ff; color: #2563eb; }
+  .icon-green { background: #ecfdf5; color: #059669; }
+  .icon-amber { background: #fff8e6; color: #b45309; }
+  .icon-purple { background: #f3e8ff; color: #9333ea; }
+
+  .custom-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    border: 1px solid #eef2f6;
+    height: 100%;
+  }
+  .table-custom {
+    vertical-align: middle;
+  }
+  .table-custom thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 10px 14px;
+  }
+  .table-custom tbody td {
+    padding: 12px 14px;
+    color: #334155;
+    font-size: 13px;
+  }
+  .status-badge {
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .status-accepted { background-color: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .status-rejected { background-color: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+  .status-pending { background-color: #fff8e6; color: #b45309; border: 1px solid #fde68a; }
+
+  .btn-quick {
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .btn-quick:hover {
+    transform: translateY(-2px);
+  }
+  .profile-pill {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+</style>
+
+<!-- Welcome Candidate Banner -->
+<div class="user-welcome-card d-flex justify-content-between align-items-center flex-wrap gap-3">
+  <div>
+    <h2 class="fw-bold mb-1 text-white">Welcome back, {{ js.name }}! 👋</h2>
+    <p class="mb-0 text-white-50" style="font-size: 15px;">
+      <i class="fa fa-envelope me-1"></i> {{ js.emailaddress }} &nbsp;|&nbsp; 
+      <i class="fa fa-phone me-1"></i> {{ js.contactno }}
+    </p>
+  </div>
+  <div>
+    <a href="{% url 'viewjobs' %}" class="btn btn-light fw-semibold text-primary rounded-pill px-4 py-2 shadow-sm">
+      <i class="fa fa-briefcase me-1"></i> Browse Available Jobs
+    </a>
+  </div>
+</div>
+
+<!-- Candidate Metric Stat Cards -->
+<div class="row g-4 mb-4">
+  <!-- Card 1: Total Applied -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Applications Submitted</span>
+        <div class="icon-box icon-blue">
+          <i class="fa fa-paper-plane"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ total_applied }}</h2>
+      <span class="text-muted small">Total jobs applied by you</span>
+    </div>
+  </div>
+
+  <!-- Card 2: Accepted Applications -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Accepted Requests</span>
+        <div class="icon-box icon-green">
+          <i class="fa fa-check-circle"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #059669;">{{ accepted_applied }}</h2>
+      <span class="text-success small fw-medium">Approved by recruiters</span>
+    </div>
+  </div>
+
+  <!-- Card 3: Pending Requests -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Pending Requests</span>
+        <div class="icon-box icon-amber">
+          <i class="fa fa-clock"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #d97706;">{{ pending_applied }}</h2>
+      <span class="text-warning-emphasis small fw-medium">Under review</span>
+    </div>
+  </div>
+
+  <!-- Card 4: Available Jobs -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Available Jobs</span>
+        <div class="icon-box icon-purple">
+          <i class="fa fa-briefcase"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ total_jobs }}</h2>
+      <a href="{% url 'viewjobs' %}" class="text-primary text-decoration-none fw-semibold small">
+        View Posted Jobs <i class="fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Candidate Profile Summary & Quick Actions Row -->
+<div class="row g-4 mb-4">
+  <!-- Profile Overview Card -->
+  <div class="col-xl-7">
+    <div class="custom-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0" style="color: #1e293b;"><i class="fa fa-id-card text-primary me-2"></i>My Profile Overview</h5>
+        <a href="{% url 'userprofile' %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">View Full Profile</a>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="profile-pill">
+            <span class="text-muted small d-block">Highest Qualification</span>
+            <span class="fw-semibold text-dark">{{ js.qualificaion }}</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="profile-pill">
+            <span class="text-muted small d-block">Work Experience</span>
+            <span class="fw-semibold text-dark">{{ js.experience }}</span>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="profile-pill">
+            <span class="text-muted small d-block">Key Skills</span>
+            <span class="fw-semibold text-primary">{{ js.keyskill }}</span>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="profile-pill">
+            <span class="text-muted small d-block">Address</span>
+            <span class="fw-medium text-dark">{{ js.address }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Action Shortcuts -->
+  <div class="col-xl-5">
+    <div class="custom-card d-flex flex-column justify-content-between">
+      <div>
+        <h5 class="fw-bold mb-3" style="color: #1e293b;"><i class="fa fa-rocket text-success me-2"></i>Quick Candidate Actions</h5>
+        <div class="d-flex flex-column gap-2">
+          <a href="{% url 'viewjobs' %}" class="btn btn-primary btn-quick shadow-sm">
+            <i class="fa fa-search"></i> Search & Apply for Jobs
+          </a>
+          <a href="{% url 'userprofile' %}" class="btn btn-info text-white btn-quick shadow-sm">
+            <i class="fa fa-user-edit"></i> View My Profile
+          </a>
+          <a href="{% url 'giveresponse' %}" class="btn btn-warning text-dark btn-quick shadow-sm">
+            <i class="fa fa-comment-dots"></i> Submit Feedback / Complaint
+          </a>
+          <a href="{% url 'changeuserpwd' %}" class="btn btn-outline-secondary btn-quick">
+            <i class="fa fa-lock"></i> Change My Password
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- My Applications Table -->
+<div class="custom-card mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold mb-0" style="color: #1e293b;"><i class="fa fa-history text-purple me-2"></i>My Recent Applications</h5>
+    <a href="{% url 'viewjobs' %}" class="btn btn-sm btn-light border fw-semibold">View All Jobs</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-custom align-middle mb-0">
+      <thead>
+        <tr>
+          <th>Job Title</th>
+          <th>Location</th>
+          <th>Job Type</th>
+          <th>Applied Date</th>
+          <th class="text-center">Application Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for app in my_applications %}
+        <tr>
+          <td class="fw-semibold text-primary">{{ app.job.title }}</td>
+          <td><i class="fa fa-map-marker-alt text-danger me-1"></i> {{ app.job.location }}</td>
+          <td><span class="badge bg-light text-dark border">{{ app.job.jobtype }}</span></td>
+          <td>{{ app.applieddate }}</td>
+          <td class="text-center">
+            {% if app.status == 'Accepted' %}
+              <span class="status-badge status-accepted">✓ Accepted</span>
+            {% elif app.status == 'Rejected' %}
+              <span class="status-badge status-rejected">✕ Rejected</span>
+            {% else %}
+              <span class="status-badge status-pending">⏳ Request Pending</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5" class="text-center py-4 text-muted">You haven't applied for any jobs yet. <a href="{% url 'viewjobs' %}" class="fw-semibold">Browse jobs now!</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

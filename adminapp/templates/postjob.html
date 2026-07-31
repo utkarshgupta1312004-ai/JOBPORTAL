@@ -1,0 +1,209 @@
+{% extends 'adminbase.html'%}
+{% load static %}
+
+{% block admin %}
+<style>
+    .custom-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        padding: 28px;
+        border: 1px solid #eef2f6;
+    }
+
+    .btn-submit-job {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: #ffffff !important;
+        border: none;
+        border-radius: 25px;
+        padding: 10px 24px;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        transition: all 0.25s ease-in-out;
+    }
+
+    .btn-submit-job:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+        color: #ffffff;
+    }
+</style>
+
+<div class="custom-card mb-4">
+    <h3 class="fw-bold mb-3" style="color: #1e293b;">Post New Job</h3>
+    <hr class="mb-4">
+
+    <form class="row g-3 needs-validation" novalidate method="post">
+        {% csrf_token%}
+
+        {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-success alert-dismissible fade show rounded-3" role="alert">
+            {{m}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label fw-medium">Job Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Enter job title" id="validationCustom01"
+                required>
+            <div class="invalid-feedback">
+                Please enter a job title.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="validationCustom02" class="form-label fw-medium">Job Type</label>
+            <select class="form-select" name="jobtype" id="validationCustom02" required>
+                <option selected disabled value="">Choose Job Type...</option>
+                <option value="Full-time">Full-time</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Temporary">Temporary</option>
+                <option value="Internship">Internship</option>
+                <option value="Volunteer">Volunteer</option>
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid job type.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <label for="skill" class="form-label fw-semibold">Skills Required</label>
+            <input type="text" list="skills" name="skill_required" id="skill" class="form-control"
+                placeholder="Eg. Python, Java, React" required>
+            <div class="invalid-feedback">
+                Please enter required skills.
+            </div>
+            <datalist id="skills">
+
+                <option value="Bootstrap"></option>
+
+                <option value="C"></option>
+
+                <option value="C#"></option>
+
+                <option value="CSS"></option>
+
+                <option value="Django"></option>
+
+                <option value="Express.js"></option>
+
+                <option value="HTML"></option>
+
+                <option value="Java"></option>
+
+                <option value="Javascript"></option>
+
+                <option value="Matplotlib"></option>
+
+                <option value="MongoDB"></option>
+
+                <option value="MySQL"></option>
+
+                <option value="Node.js"></option>
+
+                <option value="Numpy"></option>
+
+                <option value="OOPS"></option>
+
+                <option value="ORM"></option>
+
+                <option value="Pandas"></option>
+
+                <option value="Python"></option>
+
+                <option value="R"></option>
+
+                <option value="REST API"></option>
+
+                <option value="React"></option>
+
+                <option value="React.js"></option>
+
+                <option value="Scikit-learn"></option>
+
+                <option value="SpringBoot"></option>
+
+                <option value="Tensorflow"></option>
+
+                <option value="js"></option>
+
+                <option value="vue.js"></option>
+
+            </datalist>
+        </div>
+
+        <div class="col-md-12">
+            <label for="validationCustom03" class="form-label fw-medium">Description</label>
+            <textarea class="form-control" name="description" placeholder="Enter job description"
+                id="validationCustom03" rows="3" style="resize: none;" required></textarea>
+            <div class="invalid-feedback">
+                Please provide a valid description.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="validationCustom04" class="form-label fw-medium">Location</label>
+            <input type="text" class="form-control" name="location" placeholder="Enter location" id="validationCustom04"
+                required>
+            <div class="invalid-feedback">
+                Please provide a valid location.
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="validationCustom05" class="form-label fw-medium">Salary</label>
+            <input type="text" class="form-control" name="salary" placeholder="Enter salary" id="validationCustom05"
+                required>
+            <div class="invalid-feedback">
+                Please provide a valid salary.
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <label for="validationCustom06" class="form-label fw-medium">Last Date to Apply</label>
+            <input type="date" class="form-control" name="lastdate" id="validationCustom06" required>
+            <div class="invalid-feedback">
+                Please select a valid last date.
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 mt-4">
+            <button class="btn btn-submit-job w-100" type="submit">POST JOB</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}

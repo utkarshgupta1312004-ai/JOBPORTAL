@@ -1,0 +1,295 @@
+{% extends 'adminbase.html'%}
+{% load static %}
+
+{% block admin %}
+<style>
+  .dash-welcome-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 28px 32px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    border: 1px solid #eef2f6;
+    transition: all 0.25s ease-in-out;
+    height: 100%;
+  }
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+  }
+  .icon-box {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  .icon-blue { background: #eff6ff; color: #2563eb; }
+  .icon-purple { background: #f3e8ff; color: #9333ea; }
+  .icon-green { background: #ecfdf5; color: #059669; }
+  .icon-orange { background: #fff7ed; color: #ea580c; }
+
+  .custom-card {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 24px;
+    border: 1px solid #eef2f6;
+    height: 100%;
+  }
+  .table-custom {
+    vertical-align: middle;
+  }
+  .table-custom thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 10px 14px;
+  }
+  .table-custom tbody td {
+    padding: 12px 14px;
+    color: #334155;
+    font-size: 13px;
+  }
+  .status-badge {
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .status-accepted { background-color: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+  .status-rejected { background-color: #fff1f2; color: #be123c; border: 1px solid #fecdd3; }
+  .status-pending { background-color: #fff8e6; color: #b45309; border: 1px solid #fde68a; }
+
+  .btn-quick {
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 8px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+  .btn-quick:hover {
+    transform: translateY(-2px);
+  }
+</style>
+
+<!-- Welcome Banner -->
+<div class="dash-welcome-card d-flex justify-content-between align-items-center flex-wrap gap-3">
+  <div>
+    <h2 class="fw-bold mb-1 text-white">Admin Dashboard 👋</h2>
+    <p class="mb-0 text-slate-300 opacity-75" style="font-size: 15px;">Overview of job seekers, posted jobs, applicant requests, and platform analytics.</p>
+  </div>
+  <div>
+    <a href="{% url 'postjob' %}" class="btn btn-light fw-semibold text-dark rounded-pill px-4 py-2 shadow-sm">
+      <i class="ti ti-plus me-1"></i> Post New Job
+    </a>
+  </div>
+</div>
+
+<!-- Stat Cards Grid -->
+<div class="row g-4 mb-4">
+  <!-- Card 1: Job Seekers -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Job Seekers</span>
+        <div class="icon-box icon-blue">
+          <i class="ti ti-users"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ jobseekers_count }}</h2>
+      <a href="{% url 'jobseekers' %}" class="text-primary text-decoration-none fw-semibold small">
+        View All Jobseekers <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 2: Posted Jobs -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Posted Jobs</span>
+        <div class="icon-box icon-purple">
+          <i class="ti ti-briefcase"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ jobs_count }}</h2>
+      <a href="{% url 'postedjob' %}" class="text-purple text-decoration-none fw-semibold small" style="color: #9333ea;">
+        View Posted Jobs <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 3: Total Applications -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-2">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Applications</span>
+        <div class="icon-box icon-green">
+          <i class="ti ti-file-text"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-2" style="color: #0f172a;">{{ applications_count }}</h2>
+      <div class="d-flex gap-1 flex-wrap mb-2">
+        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle" style="font-size: 10px;">Pending: {{ pending_count }}</span>
+        <span class="badge bg-success-subtle text-success-emphasis border border-success-subtle" style="font-size: 10px;">Accepted: {{ accepted_count }}</span>
+        <span class="badge bg-danger-subtle text-danger-emphasis border border-danger-subtle" style="font-size: 10px;">Rejected: {{ rejected_count }}</span>
+      </div>
+      <a href="{% url 'viewapplicant' %}" class="text-success text-decoration-none fw-semibold small">
+        Manage Applications <i class="ti ti-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 4: Enquiries & Feedback -->
+  <div class="col-xl-3 col-md-6">
+    <div class="stat-card">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="text-muted fw-medium text-uppercase" style="font-size: 12px; letter-spacing: 0.5px;">Inquiries & Feedback</span>
+        <div class="icon-box icon-orange">
+          <i class="ti ti-message-dots"></i>
+        </div>
+      </div>
+      <h2 class="fw-bold mb-1" style="color: #0f172a;">{{ enquiries_count }} / {{ feedback_count }}</h2>
+      <span class="text-muted small">Enquiries: {{ enquiries_count }} | Complaints: {{ complaint_count }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Shortcuts Row -->
+<div class="custom-card mb-4">
+  <h5 class="fw-bold mb-3" style="color: #1e293b;"><i class="ti ti-bolt text-primary me-2"></i>Quick Admin Actions</h5>
+  <div class="d-flex flex-wrap gap-2">
+    <a href="{% url 'postjob' %}" class="btn btn-primary btn-quick shadow-sm">
+      <i class="ti ti-plus"></i> Post Job
+    </a>
+    <a href="{% url 'viewapplicant' %}" class="btn btn-success btn-quick shadow-sm">
+      <i class="ti ti-file-check"></i> Review Applicants ({{ pending_count }})
+    </a>
+    <a href="{% url 'jobseekers' %}" class="btn btn-info text-white btn-quick shadow-sm">
+      <i class="ti ti-users"></i> View Jobseekers
+    </a>
+    <a href="{% url 'viewenquiries' %}" class="btn btn-warning text-dark btn-quick shadow-sm">
+      <i class="ti ti-help"></i> View Enquiries
+    </a>
+    <a href="{% url 'changeadminpwd' %}" class="btn btn-outline-secondary btn-quick">
+      <i class="ti ti-lock"></i> Change Password
+    </a>
+  </div>
+</div>
+
+<!-- Recent Tables Grid -->
+<div class="row g-4">
+  <!-- Recent Applicants -->
+  <div class="col-xl-7">
+    <div class="custom-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0" style="color: #1e293b;">Recent Applicants</h5>
+        <a href="{% url 'viewapplicant' %}" class="btn btn-sm btn-light border fw-semibold">View All</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-custom align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Applicant</th>
+              <th>Job Title</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for a in recent_applicants %}
+            <tr>
+              <td>
+                <div class="fw-semibold text-dark">{{ a.jobseeker.name }}</div>
+                <div class="text-muted" style="font-size: 11px;">{{ a.jobseeker.emailaddress }}</div>
+              </td>
+              <td class="fw-medium text-primary">{{ a.job.title }}</td>
+              <td>{{ a.applieddate }}</td>
+              <td>
+                {% if a.status == 'Accepted' %}
+                  <span class="status-badge status-accepted">✓ Accepted</span>
+                {% elif a.status == 'Rejected' %}
+                  <span class="status-badge status-rejected">✕ Rejected</span>
+                {% else %}
+                  <span class="status-badge status-pending">⏳ Pending</span>
+                {% endif %}
+              </td>
+              <td class="text-center">
+                <a href="{% url 'viewapplicant' %}" class="btn btn-xs btn-outline-primary rounded-pill px-2 py-1" style="font-size: 11px;">Manage</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center py-4 text-muted">No applications submitted yet.</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Jobs Posted -->
+  <div class="col-xl-5">
+    <div class="custom-card">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0" style="color: #1e293b;">Recent Jobs</h5>
+        <a href="{% url 'postedjob' %}" class="btn btn-sm btn-light border fw-semibold">View All</a>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-custom align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Salary</th>
+              <th>Type</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for j in recent_jobs %}
+            <tr>
+              <td>
+                <div class="fw-semibold text-primary">{{ j.title }}</div>
+                <div class="text-muted" style="font-size: 11px;"><i class="ti ti-map-pin text-danger"></i> {{ j.location }}</div>
+              </td>
+              <td class="fw-semibold text-success">₹{{ j.salary }}</td>
+              <td><span class="badge bg-light text-dark border">{{ j.jobtype }}</span></td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="3" class="text-center py-4 text-muted">No jobs posted yet.</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

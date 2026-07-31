@@ -1,0 +1,93 @@
+{% extends 'userbase.html'%}
+{% load static %}
+
+{% block static %}
+<h3 class="my-2 w-bold">Change User Password</h3>
+<h6>Update the account password for this accound</h6>
+<hr />
+<div class="row">
+    <div class="bw-card col-sm-6 text-dark mx-auto p-5 rounded mt-4">
+        <form class="row g-3 needs-validation" novalidate method="post">
+            <div class="text-center">
+                <div class="hh-stat-icon"><i class="fa-solid fa-lock" style="color: rgb(241, 243, 245);"></i></div>
+            </div>
+            <span class="text-center ">Password Update</span>
+            <span style="color: cadetblue;">Choose a new password different from the current one.</span>
+
+            {% csrf_token %}
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+
+            {% endfor %}
+            {% endif %}
+            <div class="col-md-12">
+                <label for="validationCustom01" class="form-label">Current Password</label>
+                <input type="password" name="oldpassword" class="form-control" id="validationCustom01" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="validationCustom02" class="form-label">New Password</label>
+                <input type="password" name="newpassword" class="form-control" id="validationCustom02" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="validationCustomUsername" class="form-label">Confirm Password</label>
+                <div class="input-group has-validation">
+                    <input type="password" name="confirmpassword" class="form-control" id="validationCustomUsername"
+                        aria-describedby="inputGroupPrepend" required>
+                    <div class="invalid-feedback">
+                        Please enter Confirm password.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 mt-3">
+                <button class="btn btn-dark w-100" type="submit">Change Password</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .hh-stat-icon {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: rgb(154, 154, 223);
+        color: var(--hh-admin-primary);
+        font-size: 22px;
+
+    }
+
+    .bw-card {
+        background: rgba(214, 211, 211, 0.623);
+        border: 1px solid rgba(195, 187, 187, 0.763);
+        border-radius: 8px;
+        padding: 2rem;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bw-card {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .bw-card:hover {
+        border-color: black;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+    }
+
+</style>
+
+{% endblock %}

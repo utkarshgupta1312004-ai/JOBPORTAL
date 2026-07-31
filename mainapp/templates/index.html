@@ -1,0 +1,456 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<div class="container-xxl py-4">
+
+    <!-- Black & White Hero Slider / Carousel Start -->
+    <div id="galaxyHeroCarousel" class="carousel slide carousel-bw my-4" data-bs-ride="carousel"
+        data-bs-interval="5000">
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators mb-3">
+            <button type="button" data-bs-target="#galaxyHeroCarousel" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#galaxyHeroCarousel" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#galaxyHeroCarousel" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Carousel Slides -->
+        <div class="carousel-inner">
+            <!-- Slide 1: Dark Executive Theme -->
+            <div class="carousel-item active">
+                <div class="carousel-bw-slide-dark text-center">
+                    <span class="badge-editorial badge-editorial-dark border-white text-white mb-3">
+                        <i class="fa-solid fa-briefcase me-1"></i> Executive Placement & HR Consultancy
+                    </span>
+                    <h1 class="display-4 font-serif fw-bold text-light mb-3" style="max-width: 900px;">
+                        Connecting Top Talent with Leading Enterprises
+                    </h1>
+                    <p class="lead font-sans text-light mx-auto mb-4" style="max-width: 750px;">
+                        Galaxy Resource Pvt. Ltd. provides strategic recruitment solutions, candidate screening, and
+                        verified placement advisory across Sultanpur and nationwide.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{% url 'register' %}" class="btn btn-bw-light py-3 px-4">
+                            <i class="fa-solid fa-user-plus me-2"></i> Register Candidate Profile
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-bw-outline text-white border-white py-3 px-4">
+                            <i class="fa-solid fa-handshake me-2"></i> Corporate Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Light Corporate Theme -->
+            <div class="carousel-item">
+                <div class="carousel-bw-slide-light text-center">
+                    <span class="badge-editorial mb-3">
+                        <i class="fa-solid fa-people-group me-1"></i> Corporate Staffing & Bulk Hiring
+                    </span>
+                    <h1 class="display-4 font-serif fw-bold text-light mb-3" style="max-width: 900px;">
+                        Empowering Businesses with Tailored Workforce Solutions
+                    </h1>
+                    <p class="lead font-sans text-light mx-auto mb-4" style="max-width: 750px;">
+                        High-volume recruitment drives, technical skill mapping, and verified placement support
+                        engineered for growing corporate enterprises.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{% url 'contact' %}" class="btn btn-bw-dark py-3 px-4">
+                            <i class="fa-solid fa-building me-2"></i> Request HR Staffing
+                        </a>
+                        <a href="{% url 'about' %}" class="btn btn-bw-outline py-3 px-4">
+                            <i class="fa-solid fa-circle-info me-2"></i> About Galaxy Consultancy
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Gray Mentorship Theme -->
+            <div class="carousel-item">
+
+                <div class="carousel-bw-slide-gray text-center">
+                    <span class="badge-editorial badge-editorial-dark  text-light mb-3">
+                        <i class="fa-solid fa-file-pen me-1"></i> Career Advisory & Skill Mentorship
+                    </span>
+                    <h1 class="display-4 font-serif fw-bold text-light mb-3" style="max-width: 900px;">
+                        Transforming Job Seekers into Industry Leaders
+                    </h1>
+                    <p class="lead font-sans text-light mx-auto mb-4" style="max-width: 750px;">
+                        Personalized resume optimization, technical interview guidance, and verified direct placement
+                        support conducted by experienced HR advisors.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="{% url 'register' %}" class="btn btn-bw-dark py-3 px-4">
+                            <i class="fa-solid fa-arrow-right me-2"></i> Apply for Career Guidance
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-bw-outline py-3 px-4">
+                            <i class="fa-solid fa-envelope me-2"></i> Contact Advisor Team
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#galaxyHeroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#galaxyHeroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- Black & White Hero Slider / Carousel End -->
+
+    <!-- Dual Section: Consultancy Overview & Quick Job Search -->
+    <div class="row g-4 my-3">
+        <!-- Consultancy Overview -->
+        <div class="col-lg-7">
+            <div class="bw-card h-100 d-flex flex-column justify-content-between p-4 p-md-5">
+                <div>
+                    <span class="badge-editorial badge-editorial-dark mb-3 text-light">
+                        <i class="fa-solid fa-building-columns me-1"></i> Who We Are
+                    </span>
+                    <h2 class="display-6 font-serif fw-bold mb-3">
+                        Your Trusted Recruitment & Placement Partner
+                    </h2>
+                    <p class="text-secondary fs-5 mb-4">
+                        Headquartered in Lucknow, Uttar Pradesh, Galaxy Resource Pvt. Ltd. operates as a full-suite HR
+                        Consultancy. We assist candidates in securing verified job roles and provide organizations with
+                        end-to-end talent acquisition services.
+                    </p>
+                </div>
+
+                <!-- Quick Performance Metrics -->
+                <div class="row g-3 pt-3 border-top">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">12k+</div>
+                            <div class="stat-label-bw">Candidates Consulted</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">500+</div>
+                            <div class="stat-label-bw">Partner Companies</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">8k+</div>
+                            <div class="stat-label-bw">Placements</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">96%</div>
+                            <div class="stat-label-bw">Retention Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Job Search Box -->
+        <div class="col-lg-5">
+            <div class="bw-card bw-card-dark h-100 p-4 p-md-5 d-flex flex-column justify-content-center">
+                <h3 class="font-serif fw-bold mb-1 text-white">Search Consultancy Listings</h3>
+                <p class="text-secondary small mb-4">Explore verified client openings actively managed by our
+                    consultants.</p>
+
+                <form action="{% url 'index' %}" method="get" class="d-flex flex-column gap-3">
+                    <div>
+                        <label for="search_keyword" class="form-label-bw text-light">Job Title or Industry
+                            Keyword</label>
+                        <input type="text" id="search_keyword" class="form-control form-control-bw"
+                            placeholder="e.g. Software Engineer, HR Manager, Analyst">
+                    </div>
+
+                    <div>
+                        <label for="search_location" class="form-label-bw text-light">Target Work Location</label>
+                        <input type="text" id="search_location" class="form-control form-control-bw"
+                            placeholder="e.g. Sultanpur, Lucknow, Noida, Remote">
+                    </div>
+
+                    <button type="submit" class="btn btn-bw-light w-100 mt-2 py-3">
+                        <i class="fa-solid fa-magnifying-glass me-2"></i> Search Verified Opportunities
+                    </button>
+                </form>
+
+                <div class="mt-4 pt-3 border-top border-secondary text-center">
+                    <span class="text-secondary small">Looking for candidate guidance? </span>
+                    <a href="{% url 'register' %}" class="text-white fw-bold text-decoration-underline ms-1">Register
+                        for Free Advisory</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consultancy Services Grid -->
+    <div class="my-5">
+        <div class="text-center mb-5">
+            <span class="badge-editorial mb-2"><i class="fa-solid fa-layer-group me-1"></i> Core Offerings</span>
+            <h2 class="font-serif fw-bold display-5">Our HR Consultancy Services</h2>
+            <p class="text-muted max-w-50 mx-auto">Comprehensive recruitment and manpower solutions tailored for both
+                job seekers and hiring managers.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Service 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-user-tie fs-4"></i>
+                    </div>
+                    <h5 class="font-serif fw-bold mb-2">Executive Placement</h5>
+                    <p class="small text-muted mb-0">Targeted recruitment solutions for leadership, managerial, and
+                        specialist roles across corporate sectors.</p>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-people-group fs-4"></i>
+                    </div>
+                    <h5 class="font-serif fw-bold mb-2">Bulk & Campus Staffing</h5>
+                    <p class="small text-muted mb-0">High-volume recruitment drives for IT, BPO, manufacturing, and
+                        entry-level graduate placements.</p>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-file-pen fs-4"></i>
+                    </div>
+                    <h5 class="font-serif fw-bold mb-2">Resume & Career Advisory</h5>
+                    <p class="small text-muted mb-0">Personalized resume refinement, interview coaching, and skill
+                        mapping conducted by experienced HR advisors.</p>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-handshake-angle fs-4"></i>
+                    </div>
+                    <h5 class="font-serif fw-bold mb-2">Corporate HR Solutions</h5>
+                    <p class="small text-muted mb-0">Custom talent sourcing, candidate background verification, and
+                        contract staffing for growing enterprises.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How Consultancy Process Works -->
+    <div class="bw-card my-5 p-4 p-md-5">
+        <div class="text-center mb-5">
+            <span class="badge-editorial mb-2"><i class="fa-solid fa-diagram-project me-1"></i> Structured
+                Methodology</span>
+            <h2 class="font-serif fw-bold display-5">How Our Consultancy Works</h2>
+            <p class="text-muted">A step-by-step transparent journey from profile evaluation to successful hiring.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Step 1 -->
+            <div class="col-md-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
+                    <div class="step-number-bw">1</div>
+                    <h5 class="font-sans fw-bold mb-2">Profile Registration</h5>
+                    <p class="small text-muted mb-0">Candidate completes registration with qualifications, key skills,
+                        and career domain preference.</p>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="col-md-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
+                    <div class="step-number-bw">2</div>
+                    <h5 class="font-sans fw-bold mb-2">HR Skill Evaluation</h5>
+                    <p class="small text-muted mb-0">Our consultants review profile data and assess skill alignment
+                        against active client vacancies.</p>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="col-md-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
+                    <div class="step-number-bw">3</div>
+                    <h5 class="font-sans fw-bold mb-2">Interview Assistance</h5>
+                    <p class="small text-muted mb-0">Candidate receives interview scheduling support, preparation
+                        guidance, and client requirement insights.</p>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="col-md-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
+                    <div class="step-number-bw">4</div>
+                    <h5 class="font-sans fw-bold mb-2">Final Onboarding</h5>
+                    <p class="small text-muted mb-0">Seamless placement completion, salary discussion assistance, and
+                        official workplace joining support.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Industry Domains Served -->
+    <div class="bw-card my-5 p-4 p-md-5">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+            <div>
+                <h3 class="font-serif fw-bold mb-1">Key Industry Domains We Serve</h3>
+                <p class="text-muted small mb-0">Connecting talent with leading employers across diverse commercial
+                    sectors.</p>
+            </div>
+            <a href="{% url 'contact' %}" class="btn btn-bw-outline btn-sm">Consultancy Inquiry <i
+                    class="fa-solid fa-arrow-right ms-1"></i></a>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">Information Technology</span>
+                <span class="category-count-bw">320 openings</span>
+            </a>
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">Banking & Financial Services</span>
+                <span class="category-count-bw">210 openings</span>
+            </a>
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">Healthcare & Pharma</span>
+                <span class="category-count-bw">145 openings</span>
+            </a>
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">Manufacturing & Engineering</span>
+                <span class="category-count-bw">98 openings</span>
+            </a>
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">BPO, KPO & Customer Care</span>
+                <span class="category-count-bw">182 openings</span>
+            </a>
+            <a href="#" class="category-badge-bw">
+                <span class="fw-semibold">Retail & Sales Operations</span>
+                <span class="category-count-bw">115 openings</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Featured Consultancy Managed Openings & Corporate CTA -->
+    <div class="row g-4 my-4">
+        <!-- Job Openings Column -->
+        <div class="col-lg-7">
+            <h3 class="font-serif fw-bold mb-3">Consultancy Managed Openings</h3>
+
+            <!-- Job Card 1 -->
+            
+            <div class="bw-card bw-card-hover mb-3 p-4">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <h5 class="font-sans fw-bold mb-1">Full Stack MERN Developer</h5>
+                        <p class="small text-muted mb-0"><i class="fa-solid fa-building me-1"></i> Managed by Galaxy HR
+                            Team • Sultanpur, UP</p>
+                    </div>
+                    <span class="badge-editorial badge-editorial-dark text-light">Full Time</span>
+                </div>
+                <div class="my-3">
+                    
+                    <span class="chip-bw">HTML5</span>
+                    <span class="chip-bw">CSS3</span>
+                    <span class="chip-bw">JavaScript</span>
+                    <span class="chip-bw">React.js</span>
+                    <span class="chip-bw">Node.js</span>
+                    <span class="chip-bw">MongoDB</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                    <span class="small text-muted"><i class="fa-solid fa-clock me-1"></i> Posted Today</span>
+                    <a href="{% url 'register' %}" class="btn btn-bw-outline btn-sm">Apply via Consultancy <i
+                            class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+
+            
+
+            <!-- Job Card 2 -->
+            <div class="bw-card bw-card-hover mb-3 p-4">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <h5 class="font-sans fw-bold mb-1">Full Stack Django Developer</h5>
+                        <p class="small text-muted mb-0"><i class="fa-solid fa-building me-1"></i> Managed by Galaxy HR
+                            Team • Sultanpur, UP</p>
+                    </div>
+                    <span class="badge-editorial badge-editorial-dark text-light">Full Time</span>
+                </div>
+                <div class="my-3">
+                    
+                    <span class="chip-bw">HTML5</span>
+                    <span class="chip-bw">CSS3</span>
+                    <span class="chip-bw">JavaScript</span>
+                    <span class="chip-bw">Python</span>
+                    <span class="chip-bw">Django</span>
+                    <span class="chip-bw">MongoDB</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                    <span class="small text-muted"><i class="fa-solid fa-clock me-1"></i> Posted Today</span>
+                    <a href="{% url 'register' %}" class="btn btn-bw-outline btn-sm">Apply via Consultancy <i
+                            class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+
+             <div class="bw-card bw-card-hover mb-3 p-4">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                        <h5 class="font-sans fw-bold mb-1">Full Stack Java Developer</h5>
+                        <p class="small text-muted mb-0"><i class="fa-solid fa-building me-1"></i> Managed by Galaxy HR
+                            Team • Sultanpur, UP</p>
+                    </div>
+                    <span class="badge-editorial badge-editorial-dark text-light">Full Time</span>
+                </div>
+                <div class="my-3">
+                    
+                    <span class="chip-bw">HTML5</span>
+                    <span class="chip-bw">CSS3</span>
+                    <span class="chip-bw">JavaScript</span>
+                    <span class="chip-bw">Java</span>
+                    <span class="chip-bw">Spring framework</span>
+                    <span class="chip-bw">MySql</span>
+                </div>
+                <div class="d-flex align-items-center justify-content-between pt-2 border-top">
+                    <span class="small text-muted"><i class="fa-solid fa-clock me-1"></i> Posted Today</span>
+                    <a href="{% url 'register' %}" class="btn btn-bw-outline btn-sm">Apply via Consultancy <i
+                            class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side Corporate CTA Card -->
+        <div class="col-lg-5">
+            <div class="bw-card bw-card-dark p-4 p-md-5 d-flex flex-column justify-content-center sticky-top"
+                style="top:10px ; z-index: -1;">
+                <div class="mb-3 text-center">
+                    <i class="fa-solid fa-handshake fa-2x p-3"
+                        style="color:rgb(181, 203, 218);border: 3px solid rgba(205, 199, 199, 0.518);"></i>
+                </div>
+                <h3 class="font-serif fw-bold mb-2 text-white">Need Talent for Your Business?</h3>
+                <p class="text-white small mb-4">Partner with Galaxy Resource Consultancy for tailored corporate
+                    recruitment, candidate screening, and bulk staffing solutions.</p>
+
+                <div class="d-flex flex-column gap-2">
+                    <a href="{% url 'contact' %}" class="btn btn-bw-light py-3 fw-bold">Request Corporate HR
+                        Consultation</a>
+                    <a href="{% url 'register' %}" class="btn btn-bw-outline text-white border-white py-2">Register as
+                        Job Seeker</a>
+                    <a href="{% url 'about' %}"
+                        class="btn btn-link text-secondary text-decoration-none small mt-2">Learn About Our Placement
+                        Record</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

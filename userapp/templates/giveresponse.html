@@ -1,0 +1,106 @@
+{% extends 'userbase.html' %}
+{% load static %}
+
+{% block static %}
+
+<style>
+    .bw-card {
+        background: rgba(214, 211, 211, 0.623);
+        border: 1px solid rgba(195, 187, 187, 0.763);
+        border-radius: 8px;
+        padding: 2rem;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bw-card-hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .bw-card-hover:hover {
+        border-color: black;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+        transform: translateY(-2px);
+    }
+
+    .bw-card-dark {
+        background: black;
+        color: wheat;
+        border: 1px solid #121212;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+     .hh-stat-icon {
+        display: inline-grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: rgb(154, 154, 223);
+        color: var(--hh-admin-primary);
+        font-size: 22px;
+
+    }
+</style>
+
+<div class="container-xxl py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-sm-5">
+
+            <div class="bw-card bw-card-hover p-4 p-md-5">
+                <div class="text-center">
+                    <div class="hh-stat-icon"><i class="fa-solid fa-envelope" style="color: rgb(116, 192, 252);"></i></div>
+                </div>
+                <div class="text-center my-4">
+                    <span class="badge-editorial mb-2">Send Response</span>
+                    <h2 class="font-serif fw-bold display-6 mb-1">Welcome User</h2>
+                    <p class="text-muted small">Your Response matter for Us.</p>
+                </div>
+
+                {% if messages %}
+                {% for m in messages %}
+                <div class="alert alert-dark alert-dismissible fade show border-dark mb-4" role="alert">
+                    <i class="fa-solid fa-circle-info me-2"></i> {{ m }}
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                <form method="post" class="d-flex flex-column gap-3">
+                    {% csrf_token %}
+
+                    <div>
+                        <label for="response" class="form-label">Response Type</label>
+                        <select class="form-select" id="respons" required name="responsetype">
+                            <option selected disabled value="">Choose...</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Complaint">Complaint</option>
+                        </select>
+                    </div>
+
+                     <div>
+                        <label for="mes" class="form-label">Subject</label>
+                        <textarea id="mes" name="subject" class="form-control form-control-bw"
+                            placeholder="Enter your message" rows="2" style="resize: none;" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="restext" class="form-label">Message</label>
+                        <textarea id="restext" name="responsetext" class="form-control form-control-bw"
+                            placeholder="Enter your Response text" rows="3" style="resize: none;" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-dark py-3 mt-2 fw-bold">
+                        <i class="fa-solid fa-right-to-bracket me-2"></i> Submit Response
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

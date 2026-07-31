@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<div class="container-xxl py-4">
+
+    <!-- About Hero Header -->
+    <div class=" bw-card-about my-4 p-4 p-md-5 text-center">
+        <div class="background-image">
+            <video id="bgVedio" class="bg-video" autoplay loop muted playsinline>
+                <source src="{% static 'img/ved1.mp4' %}" type="video/mp4">
+            </video>
+        </div>
+        <div class="background-content">
+            <span class="badge-editorial badge-editorial-dark border-white text-white mb-3">
+                <i class="fa-solid fa-building-columns me-1"></i> Lucknow Premier HR & Placement Consultancy
+            </span>
+            <h1 class="display-3 font-display fw-bold text-white mb-3">
+                Pioneering Excellence in HR & Talent Placement
+            </h1>
+            <p class="lead font-sans text-light mx-auto mb-4" style="max-width: 850px;">
+                Galaxy Resource Pvt. Ltd. was established to revolutionize career advisory, job discovery, and corporate
+                talent acquisition across Uttar Pradesh and nationwide.
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="{% url 'register' %}" class="btn btn-bw-light py-3 px-4">
+                    <i class="fa-solid fa-user-plus me-2"></i> Register Candidate Profile
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-bw-outline text-white border-white py-3 px-4">
+                    <i class="fa-solid fa-phone me-2"></i> Contact Consultancy Team
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Access the video element
+        const video = document.getElementById('bgVideo');
+
+        // Adjust playback speed
+        // 1.0 = normal speed | 0.5 = half speed (slow motion) | 2.0 = double speed
+        video.playbackRate = 0.2; 
+    </script>
+
+    <!-- Company Heritage & Leadership Section -->
+    <div class="row g-4 my-4">
+        <div class="col-lg-7">
+            <div class="bw-card h-100 p-4 p-md-5 d-flex flex-column justify-content-between">
+                <div>
+                    <span class="badge-editorial mb-3"><i class="fa-solid fa-landmark me-1"></i> Our Origin &
+                        Heritage</span>
+                    <h2 class="display-6 font-display fw-bold mb-3">Rooted in Lucknow, UP</h2>
+                    <p class="text-secondary fs-5 mb-3">
+                        Headquartered in Lucknow, Uttar Pradesh, <strong>Galaxy Resource Pvt. Ltd.</strong> operates
+                        under the guidance of <strong>Asif Ansari</strong> and was engineered by <strong>Utkarsh
+                            Gupta</strong> to connect talent with opportunity.
+                    </p>
+                    <p class="text-muted mb-4">
+                        We bridge the gap between job seekers from Tier-2 and Tier-3 regions and top corporate employers
+                        in major economic hubs like Lucknow, Noida, Delhi NCR, Bangalore, and Mumbai.
+                    </p>
+                </div>
+
+                <div class="row g-3 pt-3 border-top">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">12k+</div>
+                            <div class="stat-label-bw">Guided Seekers</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">500+</div>
+                            <div class="stat-label-bw">Clients</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">50+</div>
+                            <div class="stat-label-bw">Cities</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-box-bw">
+                            <div class="stat-number-bw">100%</div>
+                            <div class="stat-label-bw">Verified</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="bw-card bw-card-dark h-100 p-4 p-md-5 d-flex flex-column justify-content-center">
+                <span class="badge-editorial badge-editorial-dark border-white text-white mb-3">
+                    <i class="fa-solid fa-bullseye me-1"></i> Our Vision & Mission
+                </span>
+                <h3 class="font-display fw-bold text-white mb-3">Empowering Talent with Integrity</h3>
+                <p class="text-secondary mb-3">
+                    <strong>Vision:</strong> To become India’s most trusted HR consultancy by delivering automated,
+                    transparent, and bias-free talent placement solutions.
+                </p>
+                <p class="text-secondary mb-4">
+                    <strong>Mission:</strong> To ensure zero-cost recruitment assistance for job seekers while providing
+                    corporate recruiters with pre-screened, industry-ready professionals.
+                </p>
+                <div class="p-3 bg-dark rounded border border-secondary">
+                    <p class="small text-light mb-0">
+                        <i class="fa-solid fa-quote-left text-white me-2"></i> Quality recruitment is not just about
+                        filling vacancies — it is about building long-term career partnerships.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specialized Consultancy Solutions -->
+    <div class="my-5">
+        <div class="text-center mb-5">
+            <span class="badge-editorial mb-2"><i class="fa-solid fa-gears me-1"></i> Comprehensive Solutions</span>
+            <h2 class="font-display fw-bold display-5">Specialized HR Consultancy Services</h2>
+            <p class="text-muted max-w-50 mx-auto">Providing strategic recruitment and workforce advisory across
+                corporate sectors.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Service 1 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-user-check fs-4"></i>
+                    </div>
+                    <h5 class="font-display fw-bold mb-2">Executive Search</h5>
+                    <p class="small text-muted mb-0">Headhunting and targeted sourcing for C-suite, managerial, and
+                        specialist roles.</p>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-graduation-cap fs-4"></i>
+                    </div>
+                    <h5 class="font-display fw-bold mb-2">Campus & Bulk Drives</h5>
+                    <p class="small text-muted mb-0">Organizing placement drives with academic institutes to place fresh
+                        graduates into corporate roles.</p>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-file-invoice fs-4"></i>
+                    </div>
+                    <h5 class="font-display fw-bold mb-2">Resume Optimization</h5>
+                    <p class="small text-muted mb-0">Crafting ATS-compliant professional resumes and conducting mock
+                        interviews for candidates.</p>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card-bw">
+                    <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
+                        <i class="fa-solid fa-network-wired fs-4"></i>
+                    </div>
+                    <h5 class="font-display fw-bold mb-2">Corporate Staffing</h5>
+                    <p class="small text-muted mb-0">Providing temporary, contract, and permanent manpower solutions for
+                        enterprises.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pillars of Organizational Excellence -->
+    <div class="bw-card my-5 p-4 p-md-5">
+        <div class="text-center mb-5">
+            <span class="badge-editorial mb-2"><i class="fa-solid fa-shield-halved me-1"></i> Core Principles</span>
+            <h2 class="font-display fw-bold display-5">Pillars of Organizational Excellence</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="border-top border-3 border-dark pt-3">
+                    <h5 class="font-accent fw-bold mb-2">01. 100% Vetted Listings</h5>
+                    <p class="small text-muted mb-0">Every corporate client job listing is strictly reviewed by our
+                        Sultanpur admin team before going live.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="border-top border-3 border-dark pt-3">
+                    <h5 class="font-accent fw-bold mb-2">02. Zero Candidate Fees</h5>
+                    <p class="small text-muted mb-0">Candidates apply for positions without any registration fees or
+                        hidden charges.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="border-top border-3 border-dark pt-3">
+                    <h5 class="font-accent fw-bold mb-2">03. Equal Opportunity</h5>
+                    <p class="small text-muted mb-0">Fair talent assessment ensuring candidates from regional towns
+                        receive equal corporate visibility.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="border-top border-3 border-dark pt-3">
+                    <h5 class="font-accent fw-bold mb-2">04. Data Confidentiality</h5>
+                    <p class="small text-muted mb-0">Candidate contact numbers, resumes, and personal information are
+                        protected under strict security protocols.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership CTA Banner -->
+    <div class="bw-card bw-card-dark my-4 p-4 p-md-5">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge-editorial badge-editorial-dark border-white text-white mb-2">
+                    <i class="fa-solid fa-user-check me-1"></i> Partner with Galaxy Consultancy
+                </span>
+                <h3 class="font-display fw-bold text-white mb-2">Ready to Elevate Your Career or Corporate Hiring?</h3>
+                <p class="text-secondary mb-0">
+                    Connect with Galaxy Resource Pvt. Ltd. today for expert recruitment advisory, candidate placement,
+                    or enterprise hiring support.
+                </p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+                <a href="{% url 'contact' %}" class="btn btn-bw-light py-3 px-4 fw-bold">
+                    Contact Us Today <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

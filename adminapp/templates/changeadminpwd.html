@@ -1,0 +1,112 @@
+{% extends 'adminbase.html'%}
+{% load static %}
+
+{% block admin %}
+<style>
+  .custom-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 32px;
+    border: 1px solid #eef2f6;
+  }
+  .btn-submit-pwd {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    transition: all 0.25s ease-in-out;
+  }
+  .btn-submit-pwd:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+    color: #ffffff;
+  }
+  .lock-icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #eff6ff;
+    color: #2563eb;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+  }
+</style>
+
+<div class="row">
+    <div class="col-md-6 col-lg-5 mx-auto">
+        <div class="custom-card mb-4">
+            <div class="text-center mb-3">
+                <div class="lock-icon-circle mb-2">
+                    <i class="ti ti-lock"></i>
+                </div>
+                <h3 class="fw-bold mb-1" style="color: #1e293b;">Change Admin Password</h3>
+                <p class="text-muted small">Choose a secure password different from your current one.</p>
+            </div>
+
+            {% if messages %}
+            {% for m in messages %}
+            <div class="alert alert-warning alert-dismissible fade show rounded-3" role="alert">
+                {{m}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <form class="row g-3 needs-validation" novalidate method="post">
+                {% csrf_token %}
+                <div class="col-md-12">
+                    <label for="validationCustom01" class="form-label fw-medium">Current Password</label>
+                    <input type="password" name="oldpassword" class="form-control" id="validationCustom01" placeholder="Enter current password" required>
+                    <div class="invalid-feedback">
+                        Please enter current password.
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="validationCustom02" class="form-label fw-medium">New Password</label>
+                    <input type="password" name="newpassword" class="form-control" id="validationCustom02" placeholder="Enter new password" required>
+                    <div class="invalid-feedback">
+                        Please enter new password.
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="validationCustomUsername" class="form-label fw-medium">Confirm Password</label>
+                    <input type="password" name="confirmpassword" class="form-control" id="validationCustomUsername" placeholder="Confirm new password" required>
+                    <div class="invalid-feedback">
+                        Please confirm your new password.
+                    </div>
+                </div>
+
+                <div class="col-sm-12 mt-4">
+                    <button class="btn btn-submit-pwd w-100" type="submit">Update Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    (() => {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+{% endblock %}

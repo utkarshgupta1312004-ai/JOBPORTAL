@@ -1,0 +1,225 @@
+{% extends 'userbase.html'%}
+{% load static %}
+
+{% block static %}
+<style>
+  .custom-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    border: 1px solid #eef2f6;
+  }
+  .table-custom {
+    vertical-align: middle;
+  }
+  .table-custom thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 12px 16px;
+  }
+  .table-custom tbody td {
+    padding: 14px 16px;
+    color: #334155;
+    font-size: 14px;
+  }
+  .btn-action-apply {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 25px;
+    padding: 7px 18px;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    box-shadow: 0 3px 8px rgba(37, 99, 235, 0.35);
+    transition: all 0.25s ease-in-out;
+  }
+  .btn-action-apply:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(37, 99, 235, 0.45);
+    color: #ffffff;
+  }
+  .btn-action-disabled {
+    background: #cbd5e1;
+    color: #64748b !important;
+    border: none;
+    border-radius: 25px;
+    padding: 7px 18px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: not-allowed;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+  .status-badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-accepted {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+  }
+  .status-rejected {
+    background-color: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+  }
+  .status-pending {
+    background-color: #fff8e6;
+    color: #b45309;
+    border: 1px solid #fde68a;
+  }
+</style>
+
+<div class="custom-card mb-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h3 class="fw-bold mb-0" style="color: #1e293b;">View Posted Jobs</h3>
+      
+      {% if has_applied %}
+        <p class="text-muted small mb-0 mt-1"><i class="fa fa-info-circle text-primary"></i> You have already applied for 1 job. You can only apply for one job at a time.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show rounded-3" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="table-responsive mt-3">
+    <table class="table table-hover table-custom align-middle mb-0">
+      <thead>
+        <tr>
+          <th>S. No</th>
+          <th>Title</th>
+          <th>Skill Requirement</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>Salary</th>
+          <th>Job Type</th>
+          <th>Posted Date</th>
+          <th>Last Date</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for j in ji %}
+        <tr>
+          <td class="fw-bold text-muted">{{ forloop.counter }}</td>
+          <td class="fw-semibold text-primary">{{ j.title }}</td>
+          <td>{{j.skill_required}}</td>
+          <td>{{ j.description }}</td>
+          <td>{{ j.location }}</td>
+          <td class="fw-semibold text-success">₹{{ j.salary }}</td>
+          <td><span class="badge bg-light text-dark border">{{ j.jobtype }}</span></td>
+          <td>{{ j.posteddate }}</td>
+          <td>{{ j.lastdate }}</td>
+          <td class="text-center">
+            {% if j.applied_status == 'Accepted' %}
+              <span class="status-badge status-accepted">
+                ✓ Accepted
+              </span>
+            {% elif j.applied_status == 'Rejected' %}
+              <span class="status-badge status-rejected">
+                ✕ Rejected
+              </span>
+            {% elif j.applied_status == 'Request Pending' %}
+              <span class="status-badge status-pending">
+                ⏳ Request Pending
+              </span>
+            {% else %}
+              {% if has_applied %}
+                <a href="#" class="btn-action-disabled" onclick="alert('Application Limit: You are allowed to apply for only one job at a time. You have already submitted a job application.'); return false;">
+                  Apply Now
+                </a>
+              {% else %}
+                <a href="{% url 'applyjob' id=j.id %}" class="btn-action-apply" onclick="return confirmApply(event, '{{ j.title|escapejs }}')">
+                  Apply Now
+                </a>
+              {% endif %}
+            {% endif %}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="9" class="text-center py-4 text-muted">No jobs posted yet.</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function confirmApply(event, jobTitle) {
+    var consent = confirm("Are you sure you want to apply for '" + jobTitle + "'?\n\nNote: You can apply for ONLY ONE job at a time.");
+    if (!consent) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+</script>
+
+<script>
+        function filterTable() {
+            // Get the input element and its value
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase(); // Convert to uppercase for case-insensitive search
+            
+            // Get the table and all its rows
+            const table = document.getElementById("dataTable");
+            const tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows (skipping the first row, which contains the headers)
+            for (let i = 1; i < tr.length; i++) {
+                // Get all cells (td) in the current row
+                let td = tr[i].getElementsByTagName("td");
+                let rowContainsMatch = false;
+
+                // Loop through all cells in the row
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        let txtValue = td[j].textContent || td[j].innerText;
+                        // Check if the cell text contains the search query
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            rowContainsMatch = true;
+                            break; // Stop searching this row if a match is found
+                        }
+                    }
+                }
+
+                // Show the row if it contains a match, otherwise hide it
+                if (rowContainsMatch) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+{% endblock %}
