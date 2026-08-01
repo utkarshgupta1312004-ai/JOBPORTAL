@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import shutil
 from pathlib import Path
+
+try:
+    import dj_database_url
+except ImportError:
+    dj_database_url = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +33,14 @@ SECRET_KEY = 'django-insecure-owp$%sfw=m)oz0f2u1+$$o(oet_i%&#6a-$6(i1w5ula807+#-
 DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'localhost', '*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://*.now.sh',
+    'http://127.0.0.1',
+    'http://localhost',
+]
+
 
 
 
@@ -74,15 +88,38 @@ TEMPLATES = [
 WSGI_APPLICATION = 'jobportal.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DATABASE_URL and dj_database_url:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
     }
-}
+elif os.environ.get('VERCEL'):
+    tmp_db = Path('/tmp/db.sqlite3')
+    base_db = BASE_DIR / 'db.sqlite3'
+    if not tmp_db.exists() and base_db.exists():
+        try:
+            shutil.copy2(base_db, tmp_db)
+        except Exception:
+            pass
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': tmp_db,
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 # Password validation

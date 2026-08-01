@@ -229,11 +229,20 @@ h6 {
 }
 
 .bw-card-about {
-  background:transparent;
-  color: var(--bw-black);
- 
-  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bw-black);
+  padding: 3rem 1.5rem;
+  border: 1px solid var(--bw-charcoal);
+  box-shadow: var(--bw-shadow-md);
+  aspect-ratio: 16 / 9;
 }
+
 
 .bw-card-dark h1,
 .bw-card-dark h2,
@@ -542,35 +551,102 @@ h6 {
   background: var(--bw-black);
 }
 
-.background-vedio{
-  position: relative;
+.background-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100vh; /* Full viewport height */
-  overflow: hidden; /* Prevents scrollbars from oversized video */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000000;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .bg-video {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: 100%;
+  height: 100%;
   min-width: 100%;
   min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%); /* Centers the video precisely */
-  object-fit: cover; /* Ensures video scales without stretching/distortion */
-  z-index: -1; /* Sends video behind content */
-  pointer-events: none; /* Prevents user interactions (clicks/hovers) on video */
- 
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
 }
-.background-content{
+
+.bg-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(5, 5, 5, 0.65) 0%, rgba(5, 5, 5, 0.85) 100%);
+  z-index: 2;
+}
+
+.background-content {
   position: relative;
-  z-index: 1; /* Sits above the video */
+  z-index: 3;
   color: #ffffff;
   text-align: center;
-  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   Responsive Aspect-Ratio & Multi-Device Media Queries
+   ========================================================================== */
+
+/* Mobile & Narrow Screen Aspect Ratios (< 768px) */
+@media (max-width: 767.98px) {
+  .bw-card-about {
+    aspect-ratio: auto;
+    min-height: 440px;
+    padding: 2.5rem 1rem;
+  }
+  .bw-card-about h1 {
+    font-size: clamp(1.6rem, 5.5vw, 2.25rem) !important;
+  }
+  .bw-card-about p.lead {
+    font-size: 0.95rem !important;
+  }
+  .stat-box-bw {
+    padding: 1rem 0.5rem;
+  }
+  .stat-number-bw {
+    font-size: 1.5rem;
+  }
+  .stat-label-bw {
+    font-size: 0.7rem;
+  }
+}
+
+/* Tablet Aspect Ratios (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .bw-card-about {
+    aspect-ratio: 16 / 10;
+    min-height: 400px;
+    padding: 3.5rem 2rem;
+  }
+  .bw-card-about h1 {
+    font-size: clamp(2.2rem, 4vw, 2.8rem) !important;
+  }
+}
+
+/* Ultra-Wide Aspect Ratio Monitors (>= 21:9 ratio) */
+@media (min-aspect-ratio: 21/9) {
+  .bw-card-about {
+    aspect-ratio: 21 / 9;
+    max-height: 500px;
+  }
+}
+
+/* Vertical / Portrait Aspect Ratios (e.g., Mobile Vertical or Tablet Portrait) */
+@media (max-aspect-ratio: 1/1) {
+  .bw-card-about {
+    aspect-ratio: 4 / 5;
+    min-height: 460px;
+  }
 }

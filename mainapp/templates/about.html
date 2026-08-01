@@ -6,11 +6,12 @@
 <div class="container-xxl py-4">
 
     <!-- About Hero Header -->
-    <div class=" bw-card-about my-4 p-4 p-md-5 text-center">
-        <div class="background-image">
-            <video id="bgVedio" class="bg-video" autoplay loop muted playsinline>
+    <div class="bw-card-about my-4 p-4 p-md-5 text-center">
+        <div class="background-video-container">
+            <video id="bgVideo" class="bg-video" autoplay loop muted playsinline>
                 <source src="{% static 'img/ved1.mp4' %}" type="video/mp4">
             </video>
+            <div class="bg-video-overlay"></div>
         </div>
         <div class="background-content">
             <span class="badge-editorial badge-editorial-dark border-white text-white mb-3">
@@ -34,13 +35,14 @@
         </div>
     </div>
     <script>
-        // Access the video element
-        const video = document.getElementById('bgVideo');
-
-        // Adjust playback speed
-        // 1.0 = normal speed | 0.5 = half speed (slow motion) | 2.0 = double speed
-        video.playbackRate = 0.2; 
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bgVideo');
+            if (video) {
+                video.playbackRate = 0.5;
+            }
+        });
     </script>
+
 
     <!-- Company Heritage & Leadership Section -->
     <div class="row g-4 my-4">
@@ -125,7 +127,7 @@
 
         <div class="row g-4">
             <!-- Service 1 -->
-            <div class="col-md-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="service-card-bw">
                     <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
                         <i class="fa-solid fa-user-check fs-4"></i>
@@ -137,7 +139,7 @@
             </div>
 
             <!-- Service 2 -->
-            <div class="col-md-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="service-card-bw">
                     <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
                         <i class="fa-solid fa-graduation-cap fs-4"></i>
@@ -149,7 +151,7 @@
             </div>
 
             <!-- Service 3 -->
-            <div class="col-md-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="service-card-bw">
                     <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
                         <i class="fa-solid fa-file-invoice fs-4"></i>
@@ -161,7 +163,7 @@
             </div>
 
             <!-- Service 4 -->
-            <div class="col-md-6 col-lg-3">
+            <div class="col-12 col-sm-6 col-lg-3">
                 <div class="service-card-bw">
                     <div class="bg-black text-white p-3 rounded-circle d-inline-flex mb-3">
                         <i class="fa-solid fa-network-wired fs-4"></i>
@@ -182,29 +184,29 @@
         </div>
 
         <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="border-top border-3 border-dark pt-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
                     <h5 class="font-accent fw-bold mb-2">01. 100% Vetted Listings</h5>
                     <p class="small text-muted mb-0">Every corporate client job listing is strictly reviewed by our
                         Sultanpur admin team before going live.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="border-top border-3 border-dark pt-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
                     <h5 class="font-accent fw-bold mb-2">02. Zero Candidate Fees</h5>
                     <p class="small text-muted mb-0">Candidates apply for positions without any registration fees or
                         hidden charges.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="border-top border-3 border-dark pt-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
                     <h5 class="font-accent fw-bold mb-2">03. Equal Opportunity</h5>
                     <p class="small text-muted mb-0">Fair talent assessment ensuring candidates from regional towns
                         receive equal corporate visibility.</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="border-top border-3 border-dark pt-3">
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="border-top border-3 border-dark pt-3 h-100">
                     <h5 class="font-accent fw-bold mb-2">04. Data Confidentiality</h5>
                     <p class="small text-muted mb-0">Candidate contact numbers, resumes, and personal information are
                         protected under strict security protocols.</p>
@@ -212,6 +214,7 @@
             </div>
         </div>
     </div>
+
 
     <!-- Leadership CTA Banner -->
     <div class="bw-card bw-card-dark my-4 p-4 p-md-5">
